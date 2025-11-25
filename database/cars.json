@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "model": "BMW x7",
+        "color": "red",
+        "raqam": "10 P 220 LT",
+        "userId": 1
+    },
+    {
+        "id": 2,
+        "model": "Jigule",
+        "color": "Ko'k",
+        "raqam": "10 P 220 LT",
+        "userId": 1
+    },
+    {
+        "id": 3,
+        "model": "Nexia3",
+        "color": "Oq",
+        "raqam": "10 AA 223 A",
+        "userId": 2
+    }
+]
