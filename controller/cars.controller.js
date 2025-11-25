@@ -10,16 +10,16 @@ function getCar(req, res) {
 }
 
 function postCar(req, res) {
-	let { model, color, raqam, userId } = req.body
-	if (!(model, color, raqam, userId))
+	let { model, color, raqam, carId } = req.body
+	if (!(model, color, raqam, carId))
 		return res.json({
 			message: 'All data required',
 		})
-	let users = readFile('./users.json')
-	let user = users.find((el) => el.id == userId)
-	if (!user)
+	let cars = readFile('./cars.json')
+	let car = cars.find((el) => el.id == carId)
+	if (!car)
 		return res.json({
-			message: 'User not found in this id',
+			message: 'car not found in this id',
 		})
 
 	let newCar = {
@@ -27,7 +27,7 @@ function postCar(req, res) {
 		model,
 		color,
 		raqam,
-		userId,
+		carId,
 	}
 	cars.push(newCar)
 	const message = writeFile('./cars.json', cars)
@@ -49,8 +49,43 @@ function getCarById(req, res) {
         car
     })
 }
+
+function updateCar(req, res){
+	let cars = readFile('./cars.json')
+    let body = req.body
+    let car = cars.find(el => el.id == req.params.id)
+	if (!car)
+    return res.json({ 
+		message: "EROR"
+	})
+		
+    car.model = body.model ? body.model : car.model
+    car.color = body.color ? body.color : car.color
+    car.raqam = body.raqam ? body.raqam : car.raqam
+    car.carId = body.carId ? body.carId : car.carId
+    writeFile('./cars.json', cars)
+
+    res.json({
+        message: "Succsess",
+        car
+    })
+}
+
+function deleteCar(req, res){
+	let cars = readFile('./cars.json')
+	let id = req.params.id
+	let car = cars.filter(el => el.id != id)
+	writeFile('./cars.json', car)
+
+	res.json({
+		message: "success delete of car"
+	})
+}
+
 module.exports = {
 	getCar,
 	postCar,
 	getCarById,
+	updateCar,
+	deleteCar
 }
